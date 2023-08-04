@@ -5,8 +5,7 @@ defmodule Cards do
       "Two",
       "Three",
       "Four",
-      "Five",
-      "Six"
+      "Five"
     ]
 
     suits = [
@@ -16,21 +15,23 @@ defmodule Cards do
       "Spades"
     ]
 
-    cards =
-      for value <- values do
-        for suit <- suits do
-          "#{value} of #{suit}"
-        end
-      end
-
-    List.flatten(cards)
+    for suit <- suits, value <- values do
+      "#{value} of #{suit}"
+    end
   end
 
-  def shuffle_deck(deck) do
+  def shuffle(deck) do
     Enum.shuffle(deck)
   end
 
-  def hello_wrld do
-    "Hello World"
+  def contains?(deck, hand) do
+    Enum.member?(deck, hand)
+  end
+
+  def deal(deck, hand_size) do
+    Enum.split(deck, hand_size)
   end
 end
+
+Cards.create_deck() |> Cards.deal(4) |> IO.inspect()
+# Cards.create_map() |> Cards.iterate_map() |> IO.inspect()
